@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kaztro.fullstackbackenddatasoft.repository.CategoriasRepository;
 import com.kaztro.fullstackbackenddatasoft.repository.ProductosRepository;
 
-import com.kaztro.fullstackbackenddatasoft.model.Categorias;
-import com.kaztro.fullstackbackenddatasoft.model.Productos;
+import com.kaztro.fullstackbackenddatasoft.model.Category;
+import com.kaztro.fullstackbackenddatasoft.model.PostRequest;
+import com.kaztro.fullstackbackenddatasoft.model.Product;
 
 @RestController
 public class MainController {
@@ -26,38 +27,32 @@ public class MainController {
     /* Metodos POST */
 
     /**
-     * Función para almacenar una nueva categoria en la base de datos
+     * Función para almacenar una nueva categoria 
+     * con uno o varios productos a la vez en la base de datos
      * @param newCategory
      * @return La data que es almacenada en la base
      */
     @PostMapping("/categoria")
-    Categorias newCategory (@RequestBody Categorias newCategory) {
-        return categoriasRepository.save(newCategory);
+    Category newCategory(@RequestBody PostRequest request) {
+        return categoriasRepository.save(request.getCategory());
     }
 
     /**
-     * Función para almacenar un nuevo producto en la base de datos
+     * Función para almacenar un nuevo producto a la vez en la base de datos
      * @param newProduct
      * @return La data que es almacenada en la base
      */
     @PostMapping("/producto")
-    Productos newProduct (@RequestBody Productos newProduct) {
+    Product newProduct (@RequestBody Product newProduct) {
         return productosRepository.save(newProduct);
     }
 
     /**
-     * Función que optiene todas las categorias
+     * Función que optiene todas las categorias junto con los productos
      * @return Un arreglo con todas categorias
      */
     @GetMapping("/categorias")
-    List<Categorias> getAllCategories() {
+    List<Category> getAllCategories() {
         return categoriasRepository.findAll();
     }
-
-/* 
-    @GetMapping("/productos")
-    ResponseEntity<List<Productos>> getProductByCategory(@RequestParam Integer cat_id) {
-        return new ResponseEntity<List<Productos>>(categoriasRepository.findProductsById(cat_id), HttpStatus.OK);
-    }
-*/
 }

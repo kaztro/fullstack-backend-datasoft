@@ -1,16 +1,16 @@
 package dto;
 
-import com.kaztro.fullstackbackenddatasoft.model.Categorias;
+import com.kaztro.fullstackbackenddatasoft.model.Category;
 
 public class ProductRequest {
     
-    private Categorias categorias;
+    private Category categorias;
 
-    public Categorias getCategorias() {
+    public Category getCategorias() {
         return categorias;
     }
 
-    public void setCategorias(Categorias categorias) {
+    public void setCategorias(Category categorias) {
         this.categorias = categorias;
     }
 
